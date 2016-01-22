@@ -1,21 +1,24 @@
 # vicr
 
-Vicr stands for **"Vim-like Interactive Crystal"** and represents a tiny command line application 
-that will help you to easily write and execute Crystal code with your favorite editor.
-
-It executes crystal code once you saved and exited your editor, gives visual feedback
-and options to proceed:
+Vicr stands for **"Vim-like Interactive CRystal"** and represents a tiny command line application
+that designed to quickly execute Crystal code with fast feedback and options to proceed:
 
 ![](screen/vicr.gif)
 
-At the moment only Vim is supported.
+At the moment only Vim is supported, but other editors are going to be worked soon.
 
 ## Development
 
-VICR is under development and the following features planned to be added:
+VICR is in the initial stage and the following features planned to be added:
 
 - [X] Initial console application
-- [] Other editors support
-- [] Console Crystal code colorization
-- [] Github gist support
-- [] Ability to easily choose and run Crystal samples
+- Custom editors support
+- Console Crystal code colorization
+- Github gist support
+- Ability to easily choose and run Crystal samples
+
+## Contributing
+
+If you feel like you have a good idea to be implemented, please open a discussion.
+
+If you found a defect and enough movivated to fix it, pull requests are welcome.
