@@ -7,6 +7,23 @@ that designed to quickly execute Crystal code with fast feedback and options to 
 
 At the moment only Vim is supported, but other editors are going to be worked soon.
 
+## Installation
+
+### OS X
+
+```sh
+$ brew tap veelenga/tap
+$ brew install vicr
+```
+
+### From sources:
+
+```sh
+$ git clone https://github.com/veelenga/vicr
+$ cd vicr
+$ make
+```
+
 ## Development
 
 VICR is in the initial stage and the following features planned to be added:
