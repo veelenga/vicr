@@ -2,36 +2,40 @@ require "colorize"
 
 module Vicr
   class Runner
-    def initialize(@editor = "vim")
-      @cr_file = CrFile.new
+    def initialize
+      settings = Settings.load
+      @cr_file = CrFile.new settings.cr_file
+      @editor = settings.editor
     end
 
     def start
-      loop do
-        system(@editor, [@cr_file.path])
-        system("crystal", ["run", @cr_file.path])
-
-        execute_action read_action
-      end
+      edit; run
+      loop { next_action read_action }
+    rescue e
+      puts e.message.colorize :red
+      exit 1
     end
 
-    def execute_action(action)
+    def next_action(action)
       case action
       when :quit
         exit
       when :new
         @cr_file.create_new
+        edit; run
       when :print
-        print_cr_file_with_lines; execute_action read_action
+        print
       when :edit
-        # default action
+        edit; run
+      when :run
+        run
       else
         raise ArgumentError.new "Unknown action: #{action}"
       end
     end
 
     def read_action
-      puts "(e)dit (n)ew (p)rint (q)uit".colorize(:yellow)
+      puts "(r)un (e)dit (n)ew (p)rint (q)uit".colorize :yellow
       print ">> ".colorize(:red)
       action = STDIN.raw do |io|
         input = io.gets 1
@@ -41,21 +45,38 @@ module Vicr
           :new
         when "p"
           :print
+        when "r"
+          :run
         when "\e", "\u{3}", "q", "Q"
           :quit
         else
           :edit
         end
       end
-      puts action.colorize(:green); return action
+      puts action.colorize :green; return action
     end
 
-    private def print_cr_file_with_lines
+    def print
       @cr_file.lines.each_with_index do |line, index|
-        print "#{index + 1} ".colorize(:magenta)
-        puts line
+        puts "#{(index + 1).colorize :magenta} line"
       end
       puts
+    end
+
+    def edit
+      @editor_args ||= Array(String).new.tap do |args|
+        args.concat @editor.args_before.not_nil! if @editor.args_before
+        args << @cr_file.path
+        args.concat @editor.args_after.not_nil! if @editor.args_after
+      end
+
+      system(@editor.executable, @editor_args) ||
+        raise "Unable to edit '#{@cr_file.path}' using '#{@editor.executable}'"
+    end
+
+    def run
+      @crystal_args ||= ["run", @cr_file.path]
+      system "crystal", @crystal_args
     end
   end
 end

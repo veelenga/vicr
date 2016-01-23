@@ -2,7 +2,7 @@ module Vicr
   class CrFile
     getter! :path
 
-    def initialize(@path = File.expand_path "~/.vicr.cr")
+    def initialize(@path = path)
       File.exists?(@path) ? File.new @path, "r" : create_new
     end
 

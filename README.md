@@ -29,7 +29,8 @@ $ make
 VICR is in the initial stage and the following features planned to be added:
 
 - [X] Initial console application
-- Custom editors support
+- [X] Custom editors support
+- Command line options
 - Console Crystal code colorization
 - Github gist support
 - Ability to easily choose and run Crystal samples
