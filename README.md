@@ -5,8 +5,6 @@ that designed to quickly execute Crystal code with fast feedback and options to 
 
 ![](screen/vicr.gif)
 
-At the moment only Vim is supported, but other editors are going to be worked soon.
-
 ## Installation
 
 ### OS X
@@ -24,16 +22,36 @@ $ cd vicr
 $ make
 ```
 
+## Usage
+
+Open terminal, run `vicr`, write your Crystal program, save and exit.
+
+### Customization
+
+It is possible to configure Vicr via a configuration file.
+Default config is created on a first run and you can customize
+it and use your favorite editor with required settings.
+
+```yml
+# ~/.vicr/init.yaml
+---
+run_file: ~/.vicr/run.cr
+editor:
+  executable: nvim
+  args:
+    - "--cmd"
+    - "set paste"
+```
+
 ## Development
 
 VICR is in the initial stage and the following features planned to be added:
 
 - [X] Initial console application
-- [X] Custom editors support
-- Command line options
-- Console Crystal code colorization
+- [X] Custom editor support
 - Github gist support
 - Ability to easily choose and run Crystal samples
+- Console Crystal code colorization
 
 ## Contributing
 

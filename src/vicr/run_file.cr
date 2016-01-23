@@ -1,5 +1,5 @@
 module Vicr
-  class CrFile
+  class RunFile
     getter! :path
 
     def initialize(@path = path)

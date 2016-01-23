@@ -4,7 +4,7 @@ module Vicr
   class Runner
     def initialize
       settings = Settings.load
-      @cr_file = CrFile.new settings.cr_file
+      @run_file = RunFile.new settings.run_file
       @editor = settings.editor
     end
 
@@ -21,7 +21,7 @@ module Vicr
       when :quit
         exit
       when :new
-        @cr_file.create_new
+        @run_file.create_new
         edit; run
       when :print
         print
@@ -57,25 +57,24 @@ module Vicr
     end
 
     def print
-      @cr_file.lines.each_with_index do |line, index|
-        puts "#{(index + 1).colorize :magenta} line"
+      @run_file.lines.each_with_index do |line, index|
+        puts "#{(index + 1).colorize :magenta} #{line}"
       end
       puts
     end
 
     def edit
       @editor_args ||= Array(String).new.tap do |args|
-        args.concat @editor.args_before.not_nil! if @editor.args_before
-        args << @cr_file.path
-        args.concat @editor.args_after.not_nil! if @editor.args_after
+        args.concat @editor.args.not_nil! if @editor.args
+        args << @run_file.path
       end
 
       system(@editor.executable, @editor_args) ||
-        raise "Unable to edit '#{@cr_file.path}' using '#{@editor.executable}'"
+        raise "Unable to edit '#{@run_file.path}' using '#{@editor.executable}'"
     end
 
     def run
-      @crystal_args ||= ["run", @cr_file.path]
+      @crystal_args ||= ["run", @run_file.path]
       system "crystal", @crystal_args
     end
   end
