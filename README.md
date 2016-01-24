@@ -3,7 +3,7 @@
 Vicr stands for **"Vim-like Interactive CRystal"** and represents a tiny command line application
 that designed to quickly execute Crystal code with fast feedback and options to proceed:
 
-![](screen/vicr.gif)
+![](https://cdn.rawgit.com/veelenga/ss/master/vicr/demo.gif)
 
 ## Installation
 
@@ -28,9 +28,8 @@ Open terminal, run `vicr`, write your Crystal program, save and exit.
 
 ### Customization
 
-It is possible to configure Vicr via a configuration file.
-Default config is created on a first run and you can customize
-it and use your favorite editor with required settings.
+It is possible to configure Vicr start-up settings using `~/.vicr/init.yaml` configuration file.
+File with default config is created on a first run. You can customize it and use your favorite editor with required settings.
 
 ```yml
 # ~/.vicr/init.yaml
@@ -56,5 +55,4 @@ VICR is in the initial stage and the following features planned to be added:
 ## Contributing
 
 If you feel like you have a good idea to be implemented, please open a discussion.
-
-If you found a defect and enough movivated to fix it, pull requests are welcome.
+If you found a defect and enough motivated to fix it, pull requests are welcome.
