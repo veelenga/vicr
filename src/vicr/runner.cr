@@ -18,19 +18,19 @@ module Vicr
 
     def next_action(action)
       case action
-      when :quit
-        exit
+      when :run
+        run
+      when :edit
+        edit; run
       when :new
         @run_file.create_new
         edit; run
       when :print
         print
-      when :edit
-        edit; run
-      when :run
-        run
+      when :quit
+        exit
       else
-        raise ArgumentError.new "Unknown action: #{action}"
+        # ignore
       end
     end
 
@@ -41,16 +41,18 @@ module Vicr
         input = io.gets 1
 
         case input
+        when "r"
+          :run
+        when "e", " ", "\r"
+          :edit
         when "n"
           :new
         when "p"
           :print
-        when "r"
-          :run
-        when "\e", "\u{3}", "q", "Q"
+        when "\e", "\u{3}", "\u{4}", "q", "Q"
           :quit
         else
-          :edit
+          :unknown
         end
       end
       puts action.colorize :green; return action
