@@ -10,13 +10,13 @@ module Vicr
 
     def start
       edit; run
-      loop { next_action read_action }
+      loop { act next_action }
     rescue e
       puts e.message.colorize :red
       exit 1
     end
 
-    def next_action(action)
+    def act(action)
       case action
       when :run
         run
@@ -34,28 +34,31 @@ module Vicr
       end
     end
 
-    def read_action
+    def next_action
       puts "(r)un (e)dit (n)ew (p)rint (q)uit".colorize :yellow
       print ">> ".colorize(:red)
-      action = STDIN.raw do |io|
-        input = io.gets 1
 
-        case input
-        when "r"
-          :run
-        when "e", " ", "\r"
-          :edit
-        when "n"
-          :new
-        when "p"
-          :print
-        when "\e", "\u{3}", "\u{4}", "q", "Q"
-          :quit
-        else
-          :unknown
+      action = :unknown
+      while action == :unknown
+        action = STDIN.raw do |io|
+          case io.gets 1
+          when "r", "\r"
+            :run
+          when "e", " "
+            :edit
+          when "n"
+            :new
+          when "p"
+            :print
+          when "\e", "\u{3}", "\u{4}", "q", "Q"
+            :quit
+          else
+            :unknown
+          end
         end
       end
-      puts action.colorize :green; return action
+      puts action.colorize :green
+      action
     end
 
     def print
