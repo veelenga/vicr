@@ -3,7 +3,7 @@ module Vicr
     getter! :path
 
     def initialize(@path = path, buffer = nil)
-      File.exists?(@path) ? File.new @path, "r" : create_new(buffer)
+      buffer ? create_new buffer : File.exists?(path) || create_new
     end
 
     def delete
