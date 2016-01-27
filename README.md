@@ -26,6 +26,15 @@ $ make
 
 Open terminal, run `vicr`, write your Crystal program, save and exit.
 
+### Options
+
+Vicr is able to load file content for you to start playing with Crystal code straight away:
+
+ - use `-f` flag to load local (or even remote) file
+ - use `-g` flag to load a Github gist
+
+Use help (`-h`) for more information.
+
 ### Customization
 
 It is possible to configure Vicr start-up settings using `~/.vicr/init.yaml` configuration file.
@@ -41,16 +50,6 @@ editor:
     - "--cmd"
     - "set paste"
 ```
-
-## Development
-
-VICR is in the initial stage and the following features planned to be added:
-
-- [X] Initial console application
-- [X] Custom editor support
-- Github gist support
-- Ability to easily choose and run Crystal samples
-- Console Crystal code colorization
 
 ## Contributing
 
