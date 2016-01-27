@@ -17,14 +17,14 @@ module Vicr
           buffer = load_file path
           opts[:buffer] = buffer if buffer
         end
-        parser.on("-g ID:FILENAME", "--gist ID:FILENAME", "Gist Id and filename") do |p|
+        parser.on("-g ID:FILE", "--gist ID:FILE", "Gist ID and name of file") do |p|
           id, filename = p.split(":") if p =~ /:/
 
           unless id.try &.empty? || filename.try &.empty?
             buffer = load_gist id.not_nil!, filename.not_nil!
             opts[:buffer] = buffer if buffer
           else
-            raise "Invalid gist format. Expected 'ID:FILENAME'"
+            raise "Invalid gist format. Expected 'ID:FILE'"
           end
         end
         parser.on("-v", "--version", "Show version") { puts VERSION; exit }
