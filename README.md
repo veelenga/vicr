@@ -3,7 +3,7 @@
 Vicr stands for **"Vim-like Interactive CRystal"** and represents a tiny command line application
 that designed to quickly execute Crystal code with fast feedback and options to proceed:
 
-![](https://cdn.rawgit.com/veelenga/ss/master/vicr/demo.gif)
+![](https://media.githubusercontent.com/media/veelenga/ss/master/vicr/demo.gif)
 
 ## Installation
 
