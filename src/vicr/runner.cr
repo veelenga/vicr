@@ -2,18 +2,15 @@ require "colorize"
 
 module Vicr
   class Runner
-    def initialize
+    def initialize(opts)
       settings = Settings.load
-      @run_file = RunFile.new settings.run_file
+      @run_file = RunFile.new settings.run_file, opts[:buffer]?
       @editor = settings.editor
     end
 
     def start
       edit; run
       loop { act next_action }
-    rescue e
-      puts e.message.colorize :red
-      exit 1
     end
 
     def act(action)
@@ -29,8 +26,6 @@ module Vicr
         print
       when :quit
         exit
-      else
-        # ignore
       end
     end
 
