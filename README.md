@@ -20,6 +20,7 @@ $ brew install vicr
 $ git clone https://github.com/veelenga/vicr
 $ cd vicr
 $ make
+$ sudo make install
 ```
 
 ## Usage
