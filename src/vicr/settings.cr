@@ -6,13 +6,13 @@ module Vicr
 
     YAML.mapping({
       run_file: String,
-      editor:  Editor,
+      editor:   Editor,
     })
 
     struct Editor
       YAML.mapping({
-        executable:  String,
-        args: {type: Array(String), nilable: true},
+        executable: String,
+        args:       {type: Array(String), nilable: true},
       })
     end
 
@@ -28,7 +28,7 @@ module Vicr
       File.open(settings_filepath, "w") do |f|
         {
           run_file: DIR + "/run.cr",
-          editor:  {executable: "vim"},
+          editor:   {executable: "vim"},
         }.to_yaml f
       end
     end
