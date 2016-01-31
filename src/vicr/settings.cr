@@ -7,12 +7,21 @@ module Vicr
     YAML.mapping({
       run_file: String,
       editor:   Editor,
+      compiler: Compiler,
     })
 
     struct Editor
       YAML.mapping({
         executable: String,
         args:       {type: Array(String), nilable: true},
+      })
+    end
+
+    struct Compiler
+      YAML.mapping({
+        executable:  String,
+        args_before: {type: Array(String), nilable: true},
+        args_after:  {type: Array(String), nilable: true},
       })
     end
 
@@ -29,6 +38,7 @@ module Vicr
         {
           run_file: DIR + "/run.cr",
           editor:   {executable: "vim"},
+          compiler: {executable: "crystal", args_before: ["run", "--release"]},
         }.to_yaml f
       end
     end
