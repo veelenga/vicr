@@ -29,12 +29,21 @@ Open terminal, run `vicr`, write your Crystal program, save and exit.
 
 ### Options
 
-Vicr is able to load file content for you to start playing with Crystal code straight away:
+Vicr is able to load file content for you to start playing with Crystal code straight away.
+For example:
 
- - use `-f` flag to load local (or even remote) file
- - use `-g` flag to load a Github gist
+```sh
+# loads local file
+$ vicr src/vicr/cli.cr
+# loads Github file
+$ vicr https://github.com/manastech/crystal/blob/master/samples/2048.cr
+# loads Github gist
+$ vicr https://gist.github.com/veelenga/a5b861ccd32ff559b7d2#file-benchmark_test-cr
+# loads raw file
+$ vicr http://example.com/program.cr
+```
 
-Use help (`-h`) for more information.
+Use help (`-h` flag) for more information.
 
 ### Customization
 

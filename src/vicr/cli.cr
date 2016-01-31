@@ -9,19 +9,30 @@ module Vicr
     end
 
     def run(args)
-      opts = {} of Symbol => String
+      path, debug, clear = nil, false, false
 
       OptionParser.parse(args) do |parser|
-        parser.banner = "Usage: vicr [arguments]"
-        parser.on("-f PATH", "--file PATH", "File to load") do |path|
-          opts[:buffer] = load_file path
-        end
+        parser.banner = <<-USAGE
+        Usage: vicr [switches] [arguments] or
+               vicr [path to file to load]
+        USAGE
+        parser.on("-f PATH", "--file PATH", "File to load") { |p| path = p }
+        parser.on("-c", "--clear", "Clear current buffer") { |c| clear = true }
+        parser.on("-d", "--debug", "Debug output") { debug = true }
         parser.on("-v", "--version", "Show version") { puts VERSION; exit }
         parser.on("-h", "--help", "Show this help") { puts parser; exit }
+        parser.unknown_args do |args, after_dash|
+          path ||= args.first if args.size == 1
+        end
       end
+
+      opts = {} of Symbol => String
+      opts[:buffer] = load_file path.not_nil! if path
+      opts[:buffer] = "" if clear
 
       Runner.new(opts).start
     rescue e
+      e.inspect_with_backtrace STDERR if debug
       puts e.message.colorize :red
     end
 
