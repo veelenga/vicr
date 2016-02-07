@@ -37,10 +37,16 @@ For example:
 ```sh
 # loads local file
 $ vicr src/vicr/cli.cr
+
 # loads Github file
 $ vicr https://github.com/manastech/crystal/blob/master/samples/2048.cr
+
 # loads Github gist
 $ vicr https://gist.github.com/veelenga/a5b861ccd32ff559b7d2#file-benchmark_test-cr
+
+# loads CarcIn file
+$ vicr https://carc.in/#/r/rlj
+
 # loads raw file
 $ vicr http://example.com/program.cr
 ```
