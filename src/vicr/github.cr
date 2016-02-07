@@ -3,15 +3,17 @@ require "json"
 require "levenshtein"
 
 module Vicr
-  class Github
-    def self.raw(path : String)
+  module Github
+    extend self
+
+    def raw(path : String)
       if md = path.match /github.com\/(.*)\/(.*)\/blob\/(.*)\/(.*)/
         user, repo, branch, file = md[1], md[2], md[3], md[4]
         "https://raw.githubusercontent.com/#{user}/#{repo}/#{branch}/#{file}"
       end
     end
 
-    def self.gist_raw(path : String, language = nil : String)
+    def gist_raw(path : String, language = nil : String)
       path, filename = path.split("#file-") + [nil]
       if path && (md = path.match /gist.github.com\/.*\/(.*)/)
         files = gist_files md[1]
@@ -25,13 +27,13 @@ module Vicr
       end
     end
 
-    private def self.gist(id : String)
+    private def gist(id : String)
       resp = HTTP::Client.get "https://api.github.com/gists/" + id
       return JSON.parse(resp.body) if resp.status_code == 200
       raise ArgumentError.new "Gist with id '#{id}' not found"
     end
 
-    private def self.gist_files(id : String)
+    private def gist_files(id : String)
       gist_files = [] of Hash(Symbol, String)
       gist(id)["files"].each do |file, value|
         gist_files << {

@@ -4,6 +4,7 @@ require "json"
 
 module Vicr
   class Cli
+
     def self.run(args = ARGV)
       Cli.new.run(args)
     end
@@ -43,7 +44,7 @@ module Vicr
     end
 
     private def load_http_file(path : String)
-      raw = Github.raw(path) || Github.gist_raw(path, "Crystal") || path
+      raw = Github.raw(path) || Github.gist_raw(path, "Crystal") || CarcIn.raw(path) || path
       resp = HTTP::Client.get raw
       resp.status_code == 200 ? resp.body : nil
     end
