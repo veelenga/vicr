@@ -1,9 +1,11 @@
-# vicr [![Build Status](https://travis-ci.org/veelenga/vicr.svg?branch=master)](https://travis-ci.org/veelenga/vicr)
+<img src="https://github.com/veelenga/ss/blob/master/vicr/logo.png" width="200">
+
+[![Build Status](https://travis-ci.org/veelenga/vicr.svg?branch=master)](https://travis-ci.org/veelenga/vicr)
 
 Vicr stands for **"Vim-like Interactive CRystal"** and represents a tiny command line application
 that designed to quickly execute Crystal code with fast feedback and options to proceed:
 
-![](https://media.githubusercontent.com/media/veelenga/ss/master/vicr/demo.gif)
+![](https://raw.githubusercontent.com/veelenga/ss/master/vicr/demo.gif)
 
 ## Installation
 
@@ -35,10 +37,16 @@ For example:
 ```sh
 # loads local file
 $ vicr src/vicr/cli.cr
+
 # loads Github file
 $ vicr https://github.com/manastech/crystal/blob/master/samples/2048.cr
+
 # loads Github gist
 $ vicr https://gist.github.com/veelenga/a5b861ccd32ff559b7d2#file-benchmark_test-cr
+
+# loads CarcIn file
+$ vicr https://carc.in/#/r/rlj
+
 # loads raw file
 $ vicr http://example.com/program.cr
 ```
