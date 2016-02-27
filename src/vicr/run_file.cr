@@ -2,7 +2,8 @@ module Vicr
   class RunFile
     getter! :path
 
-    def initialize(@path = path, buffer = nil)
+    def initialize(path, buffer = nil)
+      @path = File.expand_path path
       buffer ? create_new buffer : File.exists?(path) || create_new
     end
 

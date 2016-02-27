@@ -56,7 +56,7 @@ Use help (`-h` flag) for more information.
 ### Customization
 
 It is possible to configure Vicr start-up settings using `~/.vicr/init.yaml` configuration file.
-File with default config is created on a first run. You can customize it and use your favorite editor with required settings.
+You can customize settings and use your favorite editor and even change compiler params:
 
 ```yml
 # ~/.vicr/init.yaml
@@ -67,6 +67,12 @@ editor:
   args:
     - "--cmd"
     - "set paste"
+
+compiler:
+  executable: crystal
+  args_before:
+    - "run"
+    - "--release"
 ```
 
 ## Contributing
