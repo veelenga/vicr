@@ -4,7 +4,6 @@ require "json"
 
 module Vicr
   class Cli
-
     def self.run(args = ARGV)
       Cli.new.run(args)
     end

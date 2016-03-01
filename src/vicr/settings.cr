@@ -5,8 +5,20 @@ module Vicr
     DIR = File.expand_path "~/.vicr"
 
     YAML.mapping({
-      run_file: String,
-      editor:   Editor,
+      run_file: {
+        type: String, default: DIR + "/run.cr"
+      },
+      editor:   {
+        type: Editor, default: Editor.from_yaml({
+          executalbe: "vim"
+        }.to_yaml)
+      },
+      compiler: {
+        type: Compiler, default: Compiler.from_yaml({
+          executable:  "crystal",
+          args_before: ["run", "--release"],
+        }.to_yaml),
+      },
     })
 
     struct Editor
@@ -16,21 +28,18 @@ module Vicr
       })
     end
 
-    def self.load
-      create unless File.exists? settings_filepath
-      Settings.from_yaml File.read settings_filepath
+    struct Compiler
+      getter executable
+      YAML.mapping({
+        executable:  String,
+        args_before: {type: Array(String), nilable: true},
+        args_after:  {type: Array(String), nilable: true},
+      })
     end
 
-    def self.create
-      Dir.mkdir_p DIR unless Dir.exists? DIR
-
-      File.new(settings_filepath, "w")
-      File.open(settings_filepath, "w") do |f|
-        {
-          run_file: DIR + "/run.cr",
-          editor:   {executable: "vim"},
-        }.to_yaml f
-      end
+    def self.load
+      settings = File.exists?(settings_filepath) ? File.read(settings_filepath) : ""
+      Settings.from_yaml settings
     end
 
     def self.settings_filepath

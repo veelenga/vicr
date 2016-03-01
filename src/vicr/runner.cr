@@ -6,6 +6,7 @@ module Vicr
       settings = Settings.load
       @run_file = RunFile.new settings.run_file, opts[:buffer]?
       @editor = settings.editor
+      @compiler = settings.compiler
     end
 
     def start
@@ -74,8 +75,14 @@ module Vicr
     end
 
     def run
-      @crystal_args ||= ["run", @run_file.path]
-      system "crystal", @crystal_args
+      @compiler_args ||= Array(String).new.tap do |args|
+        args.concat @compiler.args_before.not_nil! if @compiler.args_before
+        args << @run_file.path
+        args.concat @compiler.args_after.not_nil! if @compiler.args_after
+      end
+
+      system(@compiler.executable, @compiler_args) ||
+        raise "Unable to run '#{@run_file.path}' using '#{@compiler.executable}'"
     end
   end
 end
