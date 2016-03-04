@@ -1,6 +1,6 @@
-require "../spec_helper"
+require "../../spec_helper"
 
-module Vicr
+module Vicr::Service
   describe CarcIn do
     describe ".raw" do
       it "returns path to raw file on carc.in" do

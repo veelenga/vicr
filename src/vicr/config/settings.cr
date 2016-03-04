@@ -1,6 +1,6 @@
 require "yaml"
 
-module Vicr
+module Vicr::Config
   class Settings
     DIR = File.expand_path "~/.vicr"
 
@@ -20,22 +20,6 @@ module Vicr
         }.to_yaml),
       },
     })
-
-    struct Editor
-      YAML.mapping({
-        executable: String,
-        args:       {type: Array(String), nilable: true},
-      })
-    end
-
-    struct Compiler
-      getter executable
-      YAML.mapping({
-        executable:  String,
-        args_before: {type: Array(String), nilable: true},
-        args_after:  {type: Array(String), nilable: true},
-      })
-    end
 
     def self.load
       settings = File.exists?(settings_filepath) ? File.read(settings_filepath) : ""

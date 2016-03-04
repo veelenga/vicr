@@ -1,7 +1,10 @@
 require "colorize"
+require "./config/*"
 
 module Vicr
   class Runner
+    include Config
+
     def initialize(opts)
       settings = Settings.load
       @run_file = RunFile.new settings.run_file, opts[:buffer]?

@@ -1,6 +1,7 @@
 require "option_parser"
 require "http/client"
 require "json"
+require "./service/*"
 
 module Vicr
   class Cli
@@ -27,25 +28,13 @@ module Vicr
       end
 
       opts = {} of Symbol => String
-      opts[:buffer] = load_file path.not_nil! if path
+      opts[:buffer] = Buffer.load(path.not_nil!) if path
       opts[:buffer] = "" if clear
 
       Runner.new(opts).start
     rescue e
       e.inspect_with_backtrace STDERR if debug
       puts e.message.colorize :red
-    end
-
-    private def load_file(path : String)
-      buffer = File.read path if File.exists? path
-      buffer ||= load_http_file path if path.starts_with? "http"
-      buffer || raise "Unable to load file '#{path}'"
-    end
-
-    private def load_http_file(path : String)
-      raw = Github.raw(path) || Github.gist_raw(path, "Crystal") || CarcIn.raw(path) || path
-      resp = HTTP::Client.get raw
-      resp.status_code == 200 ? resp.body : nil
     end
   end
 end
