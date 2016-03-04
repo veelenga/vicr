@@ -26,15 +26,13 @@ module Vicr
       when :new
         @run_file.create_new
         edit; run
-      when :print
-        print
       when :quit
         exit
       end
     end
 
     def next_action
-      puts "(r)un (e)dit (n)ew (p)rint (q)uit".colorize :yellow
+      puts "(r)un (e)dit (n)ew (q)uit".colorize :yellow
       print ">> ".colorize(:red)
 
       action = :unknown
@@ -47,8 +45,6 @@ module Vicr
             :edit
           when "n"
             :new
-          when "p"
-            :print
           when "\e", "\u{3}", "\u{4}", "q", "Q"
             :quit
           else
@@ -58,13 +54,6 @@ module Vicr
       end
       puts action.colorize :green
       action
-    end
-
-    def print
-      @run_file.lines.each_with_index do |line, index|
-        puts "#{(index + 1).colorize :magenta} #{line}"
-      end
-      puts
     end
 
     def edit
