@@ -47,6 +47,9 @@ $ vicr https://gist.github.com/veelenga/a5b861ccd32ff559b7d2#file-benchmark_test
 # loads CarcIn file
 $ vicr https://carc.in/#/r/rlj
 
+# loads play.crystal-lang.org file
+$ vicr https://play.crystal-lang.org/#/r/rlj
+
 # loads raw file
 $ vicr http://example.com/program.cr
 ```
