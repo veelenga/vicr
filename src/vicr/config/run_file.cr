@@ -4,15 +4,19 @@ module Vicr
 
     def initialize(path, buffer = nil)
       @path = File.expand_path path
-      buffer ? create_new buffer : File.exists?(path) || create_new
+      buffer ? write buffer : File.exists?(@path) || create_new
     end
 
     def delete
       File.delete @path if File.exists? @path
     end
 
-    def create_new(buffer = nil : (Nil | String))
-      buffer ? File.write(@path, buffer) : File.new(@path, "w")
+    def create_new
+      File.new @path, "w"
+    end
+
+    def write(buffer : String)
+      File.write @path, buffer
     end
 
     def lines

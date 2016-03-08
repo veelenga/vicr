@@ -73,8 +73,7 @@ module Vicr
         args.concat @compiler.args_after.not_nil! if @compiler.args_after
       end
 
-      system(@compiler.executable, @compiler_args) ||
-        raise "Unable to run '#{@run_file.path}' using '#{@compiler.executable}'"
+      system(@compiler.executable, @compiler_args)
     end
   end
 end
