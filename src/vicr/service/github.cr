@@ -12,7 +12,7 @@ module Vicr::Service::Github
     end
   end
 
-  def gist_raw(path : String, language = nil : String)
+  def gist_raw(path : String, language : String = nil)
     path, filename = path.split("#file-") + [nil]
     if path && (md = path.match /gist\.github\.com\/.*\/(.*)/)
       files = gist_files md[1]

@@ -6,18 +6,18 @@ module Vicr::Config
 
     YAML.mapping({
       run_file: {
-        type: String, default: DIR + "/run.cr"
+        type: String, default: DIR + "/run.cr",
       },
-      editor:   {
+      editor: {
         type: Editor, default: Editor.from_yaml({
-          executalbe: "vim"
-        }.to_yaml)
+        executalbe: "vim",
+      }.to_yaml),
       },
       compiler: {
         type: Compiler, default: Compiler.from_yaml({
-          executable:  "crystal",
-          args_before: ["run", "--release"],
-        }.to_yaml),
+        executable:  "crystal",
+        args_before: ["run", "--release"],
+      }.to_yaml),
       },
     })
 
