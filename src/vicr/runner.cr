@@ -5,11 +5,27 @@ module Vicr
   class Runner
     include Config
 
+    @editor : Editor
+    @compiler : Compiler
+    @editor_args : Array(String)
+    @compiler_args : Array(String)
+
     def initialize(opts)
       settings = Settings.load
       @run_file = RunFile.new settings.run_file, opts[:buffer]?
       @editor = settings.editor
       @compiler = settings.compiler
+
+      @editor_args = Array(String).new.tap do |args|
+        args.concat @editor.args.not_nil! if @editor.args
+        args << @run_file.path
+      end
+
+      @compiler_args = Array(String).new.tap do |args|
+        args.concat @compiler.args_before.not_nil! if @compiler.args_before
+        args << @run_file.path
+        args.concat @compiler.args_after.not_nil! if @compiler.args_after
+      end
     end
 
     def start
@@ -57,22 +73,11 @@ module Vicr
     end
 
     def edit
-      @editor_args ||= Array(String).new.tap do |args|
-        args.concat @editor.args.not_nil! if @editor.args
-        args << @run_file.path
-      end
-
       system(@editor.executable, @editor_args) ||
         raise "Unable to edit '#{@run_file.path}' using '#{@editor.executable}'"
     end
 
     def run
-      @compiler_args ||= Array(String).new.tap do |args|
-        args.concat @compiler.args_before.not_nil! if @compiler.args_before
-        args << @run_file.path
-        args.concat @compiler.args_after.not_nil! if @compiler.args_after
-      end
-
       system(@compiler.executable, @compiler_args)
     end
   end

@@ -33,7 +33,7 @@ module Vicr::Service::Github
   end
 
   private def gist_files(id : String)
-    gist_files = [] of Hash(Symbol, String)
+    gist_files = [] of NamedTuple(filename: String, language: String, raw_url: String)
     gist(id)["files"].each do |file, value|
       gist_files << {
         filename: file.to_s,
