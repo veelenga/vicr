@@ -7,25 +7,22 @@ module Vicr
 
     @editor : Editor
     @compiler : Compiler
-    @editor_args : Array(String)
-    @compiler_args : Array(String)
 
     def initialize(opts)
       settings = Settings.load
-      @run_file = RunFile.new settings.run_file, opts[:buffer]?
+
       @editor = settings.editor
       @compiler = settings.compiler
+      @run_file = RunFile.new settings.run_file, opts[:buffer]?
 
-      @editor_args = Array(String).new.tap do |args|
-        args.concat @editor.args.not_nil! if @editor.args
-        args << @run_file.path
-      end
+      @editor_args = Array(String).new
+      @editor_args.concat @editor.args.not_nil! if @editor.args
+      @editor_args << @run_file.path
 
-      @compiler_args = Array(String).new.tap do |args|
-        args.concat @compiler.args_before.not_nil! if @compiler.args_before
-        args << @run_file.path
-        args.concat @compiler.args_after.not_nil! if @compiler.args_after
-      end
+      @compiler_args = Array(String).new
+      @compiler_args.concat @compiler.args_before.not_nil! if @compiler.args_before
+      @compiler_args << @run_file.path
+      @compiler_args.concat @compiler.args_after.not_nil! if @compiler.args_after
     end
 
     def start
