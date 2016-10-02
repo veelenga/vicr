@@ -19,7 +19,7 @@ module Vicr::Service::Github
       if filename
         files.map { |file| {url: file[:raw_url], dist: Levenshtein.distance file[:filename], filename} }
              .sort_by(&.[:dist].to_i)
-             .first[:url] as String
+             .first[:url].as String
       else
         (files.select { |file| file[:language] == language }.first? || files.first)[:raw_url]
       end
