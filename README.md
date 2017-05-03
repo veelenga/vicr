@@ -1,11 +1,11 @@
-<img src="https://github.com/veelenga/ss/blob/master/vicr/logo.png" width="200">
+<img src="https://github.com/veelenga/bin/blob/master/vicr/logo.png" width="200">
 
 [![Build Status](https://travis-ci.org/veelenga/vicr.svg?branch=master)](https://travis-ci.org/veelenga/vicr)
 
 Vicr stands for **"Vim-like Interactive CRystal"** and represents a tiny command line application
 that designed to quickly execute Crystal code with fast feedback and options to proceed:
 
-![](https://raw.githubusercontent.com/veelenga/ss/master/vicr/demo.gif)
+![](https://raw.githubusercontent.com/veelenga/bin/master/vicr/demo.gif)
 
 ## Installation
 
