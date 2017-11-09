@@ -12,6 +12,7 @@ module Vicr
     end
 
     def create_new
+      Dir.mkdir_p Config::Settings::DIR
       File.new @path, "w"
     end
 
