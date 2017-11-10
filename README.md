@@ -75,7 +75,7 @@ compiler:
   executable: crystal
   args_before:
     - "run"
-    - "--release"
+    - "--no-debug"
 ```
 
 ## Contributing
