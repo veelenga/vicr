@@ -9,4 +9,4 @@ license: MIT
 development_dependencies:
   ameba:
     github: veelenga/ameba
-    branch: master
+    version: 0.2.2

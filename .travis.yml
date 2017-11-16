@@ -3,4 +3,4 @@ install:
   - crystal deps
 script:
   - crystal spec
-  - ./lib/ameba/bin/ameba
+  - bin/ameba
