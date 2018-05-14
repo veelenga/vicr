@@ -18,11 +18,11 @@ module Vicr
                vicr [path to file to load]
         USAGE
         parser.on("-f PATH", "--file PATH", "File to load") { |p| path = p }
-        parser.on("-c", "--clear", "Clear current buffer") { |c| clear = true }
+        parser.on("-c", "--clear", "Clear current buffer") { clear = true }
         parser.on("-d", "--debug", "Debug output") { debug = true }
         parser.on("-v", "--version", "Show version") { puts VERSION; exit }
         parser.on("-h", "--help", "Show this help") { puts parser; exit }
-        parser.unknown_args do |args, after_dash|
+        parser.unknown_args do |args|
           path ||= args.first if args.size == 1
         end
       end

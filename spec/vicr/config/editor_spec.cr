@@ -14,7 +14,7 @@ module Vicr::Config
 
       it "requires executable" do
         expect_raises(YAML::ParseException) {
-          editor = Editor.from_yaml({args: [""]}.to_yaml)
+          Editor.from_yaml({args: [""]}.to_yaml)
         }
       end
 

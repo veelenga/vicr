@@ -33,7 +33,7 @@ module Vicr::Config
 
       it "requires executable" do
         expect_raises(YAML::ParseException) {
-          compiler = Compiler.from_yaml({args_before: [""]}.to_yaml)
+          Compiler.from_yaml({args_before: [""]}.to_yaml)
         }
       end
     end
