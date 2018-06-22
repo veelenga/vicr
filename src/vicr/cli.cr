@@ -22,8 +22,8 @@ module Vicr
         parser.on("-d", "--debug", "Debug output") { debug = true }
         parser.on("-v", "--version", "Show version") { puts VERSION; exit }
         parser.on("-h", "--help", "Show this help") { puts parser; exit }
-        parser.unknown_args do |args|
-          path ||= args.first if args.size == 1
+        parser.unknown_args do |unknown_args|
+          path ||= unknown_args.first if unknown_args.size == 1
         end
       end
 
