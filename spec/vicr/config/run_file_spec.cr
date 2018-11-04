@@ -1,8 +1,7 @@
 require "../../spec_helper"
-require "tempfile"
 
 def test_run_file
-  tempfile = Tempfile.new "run_file"
+  tempfile = File.tempfile "run_file"
   run_file = Vicr::RunFile.new tempfile.path
   begin
     yield run_file
