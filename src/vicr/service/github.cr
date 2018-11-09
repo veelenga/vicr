@@ -18,10 +18,10 @@ module Vicr::Service::Github
       files = gist_files md[1]
       if filename
         files.map { |file| {url: file[:raw_url], dist: Levenshtein.distance file[:filename], filename} }
-             .sort_by(&.[:dist].to_i)
-             .first[:url].as String
+          .sort_by(&.[:dist].to_i)
+          .first[:url].as String
       else
-        (files.select { |file| file[:language] == language }.first? || files.first)[:raw_url]
+        (files.find { |file| file[:language] == language } || files.first)[:raw_url]
       end
     end
   end
@@ -34,7 +34,7 @@ module Vicr::Service::Github
 
   private def gist_files(id : String)
     gist_files = [] of NamedTuple(filename: String, language: String, raw_url: String)
-    gist(id)["files"].each do |file, value|
+    gist(id)["files"].as_h.each do |file, value|
       gist_files << {
         filename: file.to_s,
         language: value["language"].to_s,
