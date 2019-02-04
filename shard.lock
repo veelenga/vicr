@@ -2,5 +2,5 @@ version: 1.0
 shards:
   ameba:
     github: veelenga/ameba
-    version: 0.8.1
+    commit: 62c8247e21a890845b91677d3b32e6164830f725
 
