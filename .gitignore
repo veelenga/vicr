@@ -3,4 +3,4 @@
 /.crystal/
 /.shards/
 /out
-/bin/ameba
+/bin/ameba*
