@@ -18,7 +18,7 @@ module Vicr::Service::Github
       files = gist_files md[1]
       if filename
         files.map { |file| {url: file[:raw_url], dist: Levenshtein.distance file[:filename], filename} }
-          .sort_by(&.[:dist].to_i)
+          .sort_by!(&.[:dist].to_i)
           .first[:url].as String
       else
         (files.find { |file| file[:language] == language } || files.first)[:raw_url]
