@@ -64,7 +64,6 @@ You can customize settings and use your favorite editor and even change compiler
 ```yml
 # ~/.vicr/init.yaml
 ---
-run_file: ~/.vicr/run.cr
 editor:
   executable: nvim
   args:

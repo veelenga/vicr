@@ -7,9 +7,12 @@ module Vicr::Config
 
     include YAML::Serializable
 
-    property run_file : String = DIR + "/run.cr"
     property editor : Editor = editor_default
     property compiler : Compiler = compiler_default
+
+    def run_file
+      DIR + "/run.cr"
+    end
 
     def self.load
       settings = File.exists?(settings_filepath) ? File.read(settings_filepath) : "{}"
