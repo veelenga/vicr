@@ -2,9 +2,9 @@ require "yaml"
 
 module Vicr::Config
   struct Editor
-    YAML.mapping(
-      executable: String,
-      args: {type: Array(String), nilable: true},
-    )
+    include YAML::Serializable
+
+    property executable : String
+    property args : Array(String)?
   end
 end

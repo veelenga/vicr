@@ -2,10 +2,10 @@ require "yaml"
 
 module Vicr::Config
   struct Compiler
-    YAML.mapping(
-      executable: String,
-      args_before: {type: Array(String), nilable: true},
-      args_after: {type: Array(String), nilable: true},
-    )
+    include YAML::Serializable
+
+    property executable : String
+    property args_before : Array(String)?
+    property args_after : Array(String)?
   end
 end

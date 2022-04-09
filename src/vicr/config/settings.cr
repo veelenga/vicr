@@ -3,19 +3,13 @@ require "../config/*"
 
 module Vicr::Config
   class Settings
-    DIR = File.expand_path "~/.vicr"
+    DIR = File.expand_path("~/.vicr", home: true)
 
-    YAML.mapping(
-      run_file: {
-        type: String, default: DIR + "/run.cr",
-      },
-      editor: {
-        type: Editor, default: editor_default,
-      },
-      compiler: {
-        type: Compiler, default: compiler_default,
-      },
-    )
+    include YAML::Serializable
+
+    property run_file : String = DIR + "/run.cr"
+    property editor : Editor = editor_default
+    property compiler : Compiler = compiler_default
 
     def self.load
       settings = File.exists?(settings_filepath) ? File.read(settings_filepath) : "{}"
@@ -23,14 +17,14 @@ module Vicr::Config
     end
 
     def self.settings_filepath
-      DIR + "/init.yml"
+      DIR + "/init.yaml"
     end
 
-    private def editor_default
+    def self.editor_default
       Editor.from_yaml({executable: "vim"}.to_yaml)
     end
 
-    private def compiler_default
+    def self.compiler_default
       Compiler.from_yaml({executable: "crystal", args_before: %w(run --no-debug)}.to_yaml)
     end
   end
